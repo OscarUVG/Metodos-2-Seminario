@@ -1,8 +1,6 @@
 import numpy as np
 
-# p: vector de prices
-# w: vector de weights
-# c: max capacity
+# === Dynamic Programming ===
 def knapsack_dynamic_programming(p, w, c):
     n = len(p)
     z = np.zeros((n, c+1))
@@ -25,6 +23,7 @@ def knapsack_dynamic_programming(p, w, c):
     
     return max_price, selected
 
+# === Greedy ===
 def knapsack_greedy(p, w, c):
     ratio_values = p/w
     idx_ordered = np.argsort(ratio_values)[::-1]
@@ -45,6 +44,7 @@ def knapsack_greedy(p, w, c):
     
     return max_price, selected
 
+# === Branch and Bound ===
 def knapsack_branchbound(p, w, c):
     ratio_values = p/w
     idx_ordered = np.argsort(ratio_values)[::-1]
@@ -92,6 +92,9 @@ def knapsack_branchbound_rec(p, w, c, s, l, z_best, s_best):
     return z_best, s_best
     
 
+# p: vector de prices 
+# w: vector de weights
+# c: capacity
 n = 6  # No. items
 p = np.random.randint(5, 100, n) # Quetzales
 w = np.random.randint(5, 50, n)  # Libras
